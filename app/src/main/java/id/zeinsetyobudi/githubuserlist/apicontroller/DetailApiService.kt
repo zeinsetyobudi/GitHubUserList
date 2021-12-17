@@ -5,7 +5,7 @@ import retrofit2.http.*
 
 interface DetailApiService {
     @GET("users/{username}")
-    @Headers("Authorization: token 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")
+    @Headers("Authorization: token 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")
     fun getDetail(
         @Path("username") id: String
     ): Call<DetailResponse>
