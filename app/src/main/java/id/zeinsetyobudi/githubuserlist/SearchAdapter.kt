@@ -46,7 +46,7 @@ class SearchAdapter : ListAdapter<User, SearchAdapter.ListViewHolder>(DiffCallba
 
             val nama = user.surename?: ""
             val username = user.username
-            userBinding.tvItemName.text = "$nama ($username)"
+            userBinding.tvItemName.text = userBinding.cardView.context.getString(R.string.tx, nama, username)
             userBinding.tvItemLocation.text = user.location
             userBinding.tvItemRepository.text = userBinding.cardView.context.getString(R.string.txRepo, user.repository.toString())
 

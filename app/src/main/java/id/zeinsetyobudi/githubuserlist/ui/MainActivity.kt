@@ -1,19 +1,26 @@
-package id.zeinsetyobudi.githubuserlist
+package id.zeinsetyobudi.githubuserlist.ui
 
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import id.zeinsetyobudi.githubuserlist.*
 import id.zeinsetyobudi.githubuserlist.apicontroller.*
 import id.zeinsetyobudi.githubuserlist.databinding.ActivityMainBinding
+
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,6 +32,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         actionMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(actionMainBinding.root)
+
+        val pref = SettingPreferences.getInstance(dataStore)
+        val settingsViewModel = ViewModelProvider(this, ViewModelFactory(pref)).get(
+            SettingsViewModel::class.java
+        )
+
+        settingsViewModel.getThemeSettings().observe(this,
+            { isDarkModeActive: Boolean ->
+                if (isDarkModeActive) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                } else {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+            })
 
         mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
@@ -76,6 +97,22 @@ class MainActivity : AppCompatActivity() {
             }
         })
         return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.menu_settings -> {
+                val intentSettings = Intent(this, SettingsActivity::class.java)
+                startActivity(intentSettings)
+                true
+            }
+            R.id.menu_favorite -> {
+                val intentFavorite = Intent(this, FavoriteActivity::class.java)
+                startActivity(intentFavorite)
+                true
+            }
+            else -> false
+        }
     }
 
     private fun showLoading(isLoading: Boolean) {

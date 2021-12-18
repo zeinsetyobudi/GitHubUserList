@@ -15,10 +15,6 @@ class FollowingFragment : Fragment() {
     private lateinit var actionFollowingBinding: FragmentFollowerBinding
     private lateinit var detailViewModel: DetailViewModel
 
-    companion object {
-        const val EXTRA_USER = "extra_user"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -28,7 +24,7 @@ class FollowingFragment : Fragment() {
 
         detailViewModel.stateFollowing.observe(this, {
             it.getContentIfNotHandled()?.let {
-                person.username?.let { it -> detailViewModel.getFollowingList(it) }
+                person.username?.let { followingList -> detailViewModel.getFollowingList(followingList) }
             }
         })
 
@@ -67,5 +63,9 @@ class FollowingFragment : Fragment() {
 
     private fun showLoading(isLoading: Boolean) {
         actionFollowingBinding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    companion object {
+        const val EXTRA_USER = "extra_user"
     }
 }

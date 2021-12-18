@@ -15,10 +15,6 @@ class FollowerFragment : Fragment() {
     private lateinit var actionFollowerBinding: FragmentFollowerBinding
     private lateinit var detailViewModel: DetailViewModel
 
-    companion object {
-        const val EXTRA_USER = "extra_user"
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -66,5 +62,9 @@ class FollowerFragment : Fragment() {
 
     private fun showLoading(isLoading: Boolean) {
         actionFollowerBinding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    companion object {
+        const val EXTRA_USER = "extra_user"
     }
 }

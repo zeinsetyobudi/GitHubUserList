@@ -4,6 +4,7 @@
     <string name="location">Lokasi</string>
     <string name="repository">Repositori</string>
     <string name="txRepo">%s Repository</string>
+    <string name="tx">%1$s (%2$s)</string>
     <string name="txCompany">Work at %s</string>
 
     <string name="tvName">Surename</string>
@@ -21,4 +22,9 @@
     <string name="follower">Follower</string>
     <string name="following">Following</string>
     <string name="profilePicture">Foto Profil</string>
+
+    <string name="settings">Settings</string>
+    <string name="dark_mode">Tema Gelap</string>
+    <string name="favorite">Favorite</string>
+    <string name="favorite_button">Favorite Button</string>
 </resources>

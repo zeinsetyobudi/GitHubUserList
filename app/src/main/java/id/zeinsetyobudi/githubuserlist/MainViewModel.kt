@@ -17,10 +17,6 @@ class MainViewModel: ViewModel() {
     var tmpListUser: ArrayList<User> = ArrayList()
     var isRun: Boolean = false
 
-    companion object{
-        private const val TAG = "MainViewModel"
-    }
-
     private val _listUsers = MutableLiveData<ArrayList<User>>()
     val listUsers: LiveData<ArrayList<User>> = _listUsers
 
@@ -116,5 +112,9 @@ class MainViewModel: ViewModel() {
             }
 
         })
+    }
+
+    companion object{
+        private const val TAG = "MainViewModel"
     }
 }
