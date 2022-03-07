@@ -1,4 +1,4 @@
-package id.zeinsetyobudi.githubuserlist
+package id.zeinsetyobudi.githubuserlist.ui.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import id.zeinsetyobudi.githubuserlist.User
 import id.zeinsetyobudi.githubuserlist.apicontroller.FollowResponseItem
 import id.zeinsetyobudi.githubuserlist.databinding.FragmentFollowerBinding
 
@@ -45,7 +46,7 @@ class FollowerFragment : Fragment() {
         return actionFollowerBinding.root
     }
 
-    private fun setRecycleFollowerList(followers: List<FollowResponseItem>){
+    private fun setRecycleFollowerList(followers: List<FollowResponseItem>) {
         val listFollower = ArrayList<Follower>()
         for (users in followers) {
             val follower = Follower(

@@ -1,4 +1,4 @@
-package id.zeinsetyobudi.githubuserlist.ui
+package id.zeinsetyobudi.githubuserlist.ui.favorite
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,11 +7,10 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import id.zeinsetyobudi.githubuserlist.FavoriteAdapter
-import id.zeinsetyobudi.githubuserlist.FavoriteViewModel
 import id.zeinsetyobudi.githubuserlist.R
 import id.zeinsetyobudi.githubuserlist.databinding.ActivityFavoriteBinding
 import id.zeinsetyobudi.githubuserlist.helper.ViewModelFactory
+import id.zeinsetyobudi.githubuserlist.ui.setting.SettingsActivity
 
 class FavoriteActivity : AppCompatActivity() {
 
@@ -29,11 +28,11 @@ class FavoriteActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val favoriteViewModel = obtainViewModel(this@FavoriteActivity)
-        favoriteViewModel.getAllFavorite().observe(this, { favoriteList ->
+        favoriteViewModel.getAllFavorite().observe(this) { favoriteList ->
             if (favoriteList != null) {
                 favoriteAdapter.setListFavorite(favoriteList)
             }
-        })
+        }
 
         favoriteAdapter = FavoriteAdapter()
 
@@ -54,7 +53,7 @@ class FavoriteActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
+        return when (item.itemId) {
             R.id.menu_settings -> {
                 val intentSettings = Intent(this, SettingsActivity::class.java)
                 startActivity(intentSettings)

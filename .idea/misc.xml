@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/zeins/AndroidStudioProjects/GitHubUserList/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.1424342105263158" />
         <entry key="..\:/Users/zeins/AndroidStudioProjects/GitHubUserList/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1424342105263158" />
         <entry key="..\:/Users/zeins/AndroidStudioProjects/GitHubUserList/app/src/main/res/layout/activity_detail.xml" value="0.33" />
         <entry key="..\:/Users/zeins/AndroidStudioProjects/GitHubUserList/app/src/main/res/layout/activity_favorite.xml" value="0.13223684210526315" />

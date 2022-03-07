@@ -3,13 +3,14 @@ package id.zeinsetyobudi.githubuserlist.helper
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import id.zeinsetyobudi.githubuserlist.FavoriteViewModel
-import id.zeinsetyobudi.githubuserlist.insert.FavoriteAddDeleteViewModel
+import id.zeinsetyobudi.githubuserlist.ui.favorite.FavoriteViewModel
 
-class ViewModelFactory private constructor(private val mApplication: Application) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory private constructor(private val mApplication: Application) :
+    ViewModelProvider.NewInstanceFactory() {
     companion object {
         @Volatile
         private var INSTANCE: ViewModelFactory? = null
+
         @JvmStatic
         fun getInstance(application: Application): ViewModelFactory {
             if (INSTANCE == null) {
@@ -23,9 +24,7 @@ class ViewModelFactory private constructor(private val mApplication: Application
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(FavoriteAddDeleteViewModel::class.java)) {
-            return FavoriteAddDeleteViewModel(mApplication) as T
-        } else if(modelClass.isAssignableFrom(FavoriteViewModel::class.java)){
+        if (modelClass.isAssignableFrom(FavoriteViewModel::class.java)) {
             return FavoriteViewModel(mApplication) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

@@ -1,4 +1,4 @@
-package id.zeinsetyobudi.githubuserlist
+package id.zeinsetyobudi.githubuserlist.ui.detail
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,16 +7,19 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import id.zeinsetyobudi.githubuserlist.R
 
-class FollowerAdapter(private val listFollower: ArrayList<Follower>) : RecyclerView.Adapter<FollowerAdapter.ListViewHolder>() {
+class FollowerAdapter(private val listFollower: ArrayList<Follower>) :
+    RecyclerView.Adapter<FollowerAdapter.ListViewHolder>() {
 
-    class ListViewHolder(view: View) : RecyclerView.ViewHolder(view){
+    class ListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var imgPhoto: ImageView = view.findViewById(R.id.img_item_photoFollow)
         var username: TextView = view.findViewById(R.id.tv_item_username)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.item_row_follow, parent, false)
+        val view: View =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_row_follow, parent, false)
         return ListViewHolder(view)
     }
 

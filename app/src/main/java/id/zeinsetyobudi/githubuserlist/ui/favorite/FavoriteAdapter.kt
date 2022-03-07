@@ -1,4 +1,4 @@
-package id.zeinsetyobudi.githubuserlist
+package id.zeinsetyobudi.githubuserlist.ui.favorite
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -6,12 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import id.zeinsetyobudi.githubuserlist.R
+import id.zeinsetyobudi.githubuserlist.User
 import id.zeinsetyobudi.githubuserlist.database.Favorite
 import id.zeinsetyobudi.githubuserlist.databinding.ItemFavoriteBinding
 import id.zeinsetyobudi.githubuserlist.helper.FavoriteDiffCallback
-import id.zeinsetyobudi.githubuserlist.ui.DetailActivity
+import id.zeinsetyobudi.githubuserlist.ui.detail.DetailActivity
 
-class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
+class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
 
     private val listFavorite = ArrayList<Favorite>()
 
@@ -36,14 +38,21 @@ class FavoriteAdapter: RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>(
         return listFavorite.size
     }
 
-    inner class FavoriteViewHolder(private val binding: ItemFavoriteBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class FavoriteViewHolder(private val binding: ItemFavoriteBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(favorite: Favorite) {
             with(binding) {
-                Glide.with(cvItemFavorite.context).load(favorite.avatar).circleCrop().into(imgItemPhoto)
+                Glide.with(cvItemFavorite.context).load(favorite.avatar).circleCrop()
+                    .into(imgItemPhoto)
 
-                tvItemName.text = favorite.username
+                val surename = favorite.surename ?: ""
+                tvItemName.text =
+                    cvItemFavorite.context.getString(R.string.tx, surename, favorite.username)
                 tvItemLocation.text = favorite.location
-                tvItemRepository.text = favorite.repository.toString()
+                tvItemRepository.text = cvItemFavorite.context.getString(
+                    R.string.txRepo,
+                    favorite.repository.toString()
+                )
                 cvItemFavorite.setOnClickListener {
                     val intent = Intent(it.context, DetailActivity::class.java)
                     val user = User(

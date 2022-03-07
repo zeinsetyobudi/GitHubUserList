@@ -1,4 +1,4 @@
-package id.zeinsetyobudi.githubuserlist
+package id.zeinsetyobudi.githubuserlist.ui.setting
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

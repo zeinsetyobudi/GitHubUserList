@@ -1,4 +1,4 @@
-package id.zeinsetyobudi.githubuserlist
+package id.zeinsetyobudi.githubuserlist.ui.setting
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences

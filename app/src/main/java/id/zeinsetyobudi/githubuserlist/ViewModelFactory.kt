@@ -2,8 +2,11 @@ package id.zeinsetyobudi.githubuserlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import id.zeinsetyobudi.githubuserlist.ui.setting.SettingPreferences
+import id.zeinsetyobudi.githubuserlist.ui.setting.SettingsViewModel
 
-class ViewModelFactory(private val pref: SettingPreferences) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory(private val pref: SettingPreferences) :
+    ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

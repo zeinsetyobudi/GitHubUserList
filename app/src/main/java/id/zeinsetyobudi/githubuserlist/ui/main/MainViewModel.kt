@@ -1,18 +1,19 @@
-package id.zeinsetyobudi.githubuserlist
+package id.zeinsetyobudi.githubuserlist.ui.main
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import id.zeinsetyobudi.githubuserlist.apicontroller.DetailApiConfig
+import id.zeinsetyobudi.githubuserlist.Event
+import id.zeinsetyobudi.githubuserlist.User
 import id.zeinsetyobudi.githubuserlist.apicontroller.DetailResponse
-import id.zeinsetyobudi.githubuserlist.apicontroller.SearchApiConfig
+import id.zeinsetyobudi.githubuserlist.apicontroller.ApiConfig
 import id.zeinsetyobudi.githubuserlist.apicontroller.SearchResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel: ViewModel() {
+class MainViewModel : ViewModel() {
 
     var tmpListUser: ArrayList<User> = ArrayList()
     var isRun: Boolean = false
@@ -29,8 +30,8 @@ class MainViewModel: ViewModel() {
     fun searchUser(username: String?) {
         _isLoading.value = true
         tmpListUser.clear()
-        val user = username?:""
-        val client = SearchApiConfig.getSearchApiService().getSearch(user)
+        val user = username ?: ""
+        val client = ApiConfig.getSearchApiService().getSearch(user)
         client.enqueue(object : Callback<SearchResponse> {
             override fun onResponse(
                 call: Call<SearchResponse>,
@@ -38,6 +39,7 @@ class MainViewModel: ViewModel() {
             ) {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
+                    Log.i("Respose", "${response.message()}")
                     if (responseBody != null) {
                         for (users in responseBody.items) {
                             val result = User(
@@ -73,36 +75,36 @@ class MainViewModel: ViewModel() {
     }
 
     private fun detailUser(username: String, users: User) {
-        val client = DetailApiConfig.getDetailApiService().getDetail(username)
+        val client = ApiConfig.getDetailApiService().getDetail(username)
         client.enqueue(object : Callback<DetailResponse> {
             override fun onResponse(
                 call: Call<DetailResponse>,
                 response: Response<DetailResponse>
             ) {
                 (
-                    if (response.isSuccessful) {
-                        val responseBody = response.body()
-                        if (responseBody != null) {
-                            val user = User(
-                                responseBody.id,
-                                responseBody.login,
-                                responseBody.name,
-                                responseBody.avatarUrl,
-                                responseBody.company,
-                                responseBody.location,
-                                responseBody.publicRepos,
-                                responseBody.followers,
-                                responseBody.following
-                            )
-                            tmpListUser[tmpListUser.indexOf(users)] = user
+                        if (response.isSuccessful) {
+                            val responseBody = response.body()
+                            if (responseBody != null) {
+                                val user = User(
+                                    responseBody.id,
+                                    responseBody.login,
+                                    responseBody.name,
+                                    responseBody.avatarUrl,
+                                    responseBody.company,
+                                    responseBody.location,
+                                    responseBody.publicRepos,
+                                    responseBody.followers,
+                                    responseBody.following
+                                )
+                                tmpListUser[tmpListUser.indexOf(users)] = user
+                            }
+                            _listUsers.value = tmpListUser
+                            _isLoading.value = false
+                        } else {
+                            _notification.value = Event("Gagal Memuat Profil, Coba Lagi")
+                            Log.e(TAG, "onFailure: ${response.message()}")
                         }
-                        _listUsers.value = tmpListUser
-                        _isLoading.value = false
-                    } else {
-                        _notification.value = Event("Gagal Memuat Profil, Coba Lagi")
-                        Log.e(TAG, "onFailure: ${response.message()}")
-                    }
-                )
+                        )
             }
 
             override fun onFailure(call: Call<DetailResponse>, t: Throwable) {
@@ -114,7 +116,7 @@ class MainViewModel: ViewModel() {
         })
     }
 
-    companion object{
+    companion object {
         private const val TAG = "MainViewModel"
     }
 }

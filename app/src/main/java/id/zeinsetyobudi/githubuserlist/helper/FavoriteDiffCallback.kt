@@ -4,7 +4,8 @@ import androidx.recyclerview.widget.DiffUtil
 import id.zeinsetyobudi.githubuserlist.database.Favorite
 
 class FavoriteDiffCallback
-    (private val mOldNoteList: List<Favorite>, private val mNewNoteList: List<Favorite>) : DiffUtil.Callback() {
+    (private val mOldNoteList: List<Favorite>, private val mNewNoteList: List<Favorite>) :
+    DiffUtil.Callback() {
 
     override fun getOldListSize(): Int {
         return mOldNoteList.size

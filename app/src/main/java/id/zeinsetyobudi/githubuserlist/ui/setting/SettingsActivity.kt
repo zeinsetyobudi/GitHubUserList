@@ -1,9 +1,9 @@
-package id.zeinsetyobudi.githubuserlist.ui
+package id.zeinsetyobudi.githubuserlist.ui.setting
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.CompoundButton
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -11,8 +11,6 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.switchmaterial.SwitchMaterial
 import id.zeinsetyobudi.githubuserlist.R
-import id.zeinsetyobudi.githubuserlist.SettingPreferences
-import id.zeinsetyobudi.githubuserlist.SettingsViewModel
 import id.zeinsetyobudi.githubuserlist.ViewModelFactory
 import id.zeinsetyobudi.githubuserlist.databinding.ActivitySettingsBinding
 
