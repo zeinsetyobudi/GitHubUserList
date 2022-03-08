@@ -1,7 +1,7 @@
 package id.zeinsetyobudi.githubuserlist.helper
 
 import androidx.recyclerview.widget.DiffUtil
-import id.zeinsetyobudi.githubuserlist.User
+import id.zeinsetyobudi.githubuserlist.model.User
 
 class SearchDiffCallback(private val mOldSearchList: List<User>, private val mNewSearchList: List<User>): DiffUtil.Callback() {
     override fun getOldListSize(): Int {

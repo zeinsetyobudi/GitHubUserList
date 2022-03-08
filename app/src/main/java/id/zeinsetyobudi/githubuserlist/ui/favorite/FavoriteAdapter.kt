@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.zeinsetyobudi.githubuserlist.R
-import id.zeinsetyobudi.githubuserlist.User
+import id.zeinsetyobudi.githubuserlist.model.User
 import id.zeinsetyobudi.githubuserlist.database.Favorite
 import id.zeinsetyobudi.githubuserlist.databinding.ItemFavoriteBinding
 import id.zeinsetyobudi.githubuserlist.helper.FavoriteDiffCallback

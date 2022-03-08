@@ -7,6 +7,7 @@ import id.zeinsetyobudi.githubuserlist.ui.favorite.FavoriteViewModel
 
 class ViewModelFactory private constructor(private val mApplication: Application) :
     ViewModelProvider.NewInstanceFactory() {
+
     companion object {
         @Volatile
         private var INSTANCE: ViewModelFactory? = null

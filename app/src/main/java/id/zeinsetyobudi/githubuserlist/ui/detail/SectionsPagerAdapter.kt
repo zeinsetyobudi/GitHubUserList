@@ -3,8 +3,6 @@ package id.zeinsetyobudi.githubuserlist.ui.detail
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import id.zeinsetyobudi.githubuserlist.ui.detail.FollowerFragment
-import id.zeinsetyobudi.githubuserlist.ui.detail.FollowingFragment
 
 class SectionsPagerAdapter(activity: AppCompatActivity) : FragmentStateAdapter(activity) {
 

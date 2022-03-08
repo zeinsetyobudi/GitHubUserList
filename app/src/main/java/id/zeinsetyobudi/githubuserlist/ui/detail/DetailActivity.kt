@@ -19,6 +19,7 @@ import id.zeinsetyobudi.githubuserlist.*
 import id.zeinsetyobudi.githubuserlist.database.Favorite
 import id.zeinsetyobudi.githubuserlist.databinding.ActivityDetailBinding
 import id.zeinsetyobudi.githubuserlist.helper.ViewModelFactory
+import id.zeinsetyobudi.githubuserlist.model.User
 import id.zeinsetyobudi.githubuserlist.ui.setting.SettingsActivity
 import id.zeinsetyobudi.githubuserlist.ui.favorite.FavoriteViewModel
 
@@ -132,7 +133,7 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun setUserDetailFavorite(user :User){
+    private fun setUserDetailFavorite(user : User){
         favorite.username = user.username
         favorite.surename = user.surename
         favorite.avatar = user.avatar

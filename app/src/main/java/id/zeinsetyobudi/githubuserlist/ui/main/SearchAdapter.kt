@@ -1,19 +1,17 @@
 package id.zeinsetyobudi.githubuserlist.ui.main
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.zeinsetyobudi.githubuserlist.R
-import id.zeinsetyobudi.githubuserlist.User
+import id.zeinsetyobudi.githubuserlist.model.User
 import id.zeinsetyobudi.githubuserlist.databinding.ItemRowUserBinding
 import id.zeinsetyobudi.githubuserlist.helper.SearchDiffCallback
 import java.util.Collections.emptyList
 
-class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ListViewHolder>() {
+class SearchAdapter: RecyclerView.Adapter<SearchAdapter.ListViewHolder>() {
 
     private val listUsers = ArrayList<User>()
     private lateinit var onItemClickCallback: OnItemClickCallback

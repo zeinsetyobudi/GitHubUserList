@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import id.zeinsetyobudi.githubuserlist.Follower
-import id.zeinsetyobudi.githubuserlist.User
+import id.zeinsetyobudi.githubuserlist.model.Follower
+import id.zeinsetyobudi.githubuserlist.model.User
 import id.zeinsetyobudi.githubuserlist.apicontroller.FollowResponseItem
 import id.zeinsetyobudi.githubuserlist.databinding.FragmentFollowerBinding
 

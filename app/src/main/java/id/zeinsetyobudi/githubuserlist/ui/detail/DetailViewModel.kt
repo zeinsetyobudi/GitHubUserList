@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import id.zeinsetyobudi.githubuserlist.Event
-import id.zeinsetyobudi.githubuserlist.User
+import id.zeinsetyobudi.githubuserlist.model.User
 import id.zeinsetyobudi.githubuserlist.apicontroller.*
 import retrofit2.Call
 import retrofit2.Callback

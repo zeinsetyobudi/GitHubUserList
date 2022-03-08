@@ -14,10 +14,12 @@ import androidx.appcompat.widget.SearchView
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import id.zeinsetyobudi.githubuserlist.*
 import id.zeinsetyobudi.githubuserlist.databinding.ActivityMainBinding
+import id.zeinsetyobudi.githubuserlist.model.User
 import id.zeinsetyobudi.githubuserlist.ui.detail.DetailActivity
 import id.zeinsetyobudi.githubuserlist.ui.favorite.FavoriteActivity
 import id.zeinsetyobudi.githubuserlist.ui.setting.SettingPreferences
@@ -129,5 +131,15 @@ class MainActivity : AppCompatActivity() {
         val detailIntent = Intent(this@MainActivity, DetailActivity::class.java)
         detailIntent.putExtra(DetailActivity.EXTRA_USER, user)
         startActivity(detailIntent)
+    }
+
+    class ViewModelFactory(private val pref: SettingPreferences) : ViewModelProvider.NewInstanceFactory() {
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(SettingsViewModel::class.java)) {
+                return SettingsViewModel(pref) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
+        }
     }
 }
