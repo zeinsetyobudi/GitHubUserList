@@ -1,4 +1,4 @@
-package id.zeinsetyobudi.githubuserlist.ui.detail
+package id.zeinsetyobudi.githubuserlist
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

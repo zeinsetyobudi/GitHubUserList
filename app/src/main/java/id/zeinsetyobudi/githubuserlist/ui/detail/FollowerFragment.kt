@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import id.zeinsetyobudi.githubuserlist.Follower
 import id.zeinsetyobudi.githubuserlist.User
 import id.zeinsetyobudi.githubuserlist.apicontroller.FollowResponseItem
 import id.zeinsetyobudi.githubuserlist.databinding.FragmentFollowerBinding
@@ -21,21 +22,21 @@ class FollowerFragment : Fragment() {
 
         val person = activity?.intent?.getParcelableExtra<User>(EXTRA_USER) as User
 
-        detailViewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
+        detailViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
 
-        detailViewModel.stateFollower.observe(this, {
+        detailViewModel.stateFollower.observe(this) {
             it.getContentIfNotHandled()?.let {
-                person.username?.let { it -> detailViewModel.getFollowerList(it) }
+                person.username?.let { username -> detailViewModel.getFollowerList(username) }
             }
-        })
+        }
 
-        detailViewModel.listFollower.observe(this, { followerList ->
+        detailViewModel.listFollower.observe(this) { followerList ->
             setRecycleFollowerList(followerList)
-        })
+        }
 
-        detailViewModel.isLoadingFollower.observe(this, {
+        detailViewModel.isLoadingFollower.observe(this) {
             showLoading(it)
-        })
+        }
     }
 
     override fun onCreateView(
@@ -56,8 +57,8 @@ class FollowerFragment : Fragment() {
             listFollower.add(follower)
         }
 
-        actionFollowerBinding.rvFollower.layoutManager = LinearLayoutManager(context)
         val listFollowerAdapter = FollowerAdapter(listFollower)
+        actionFollowerBinding.rvFollower.layoutManager = LinearLayoutManager(context)
         actionFollowerBinding.rvFollower.adapter = listFollowerAdapter
     }
 

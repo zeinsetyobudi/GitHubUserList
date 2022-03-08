@@ -1,4 +1,4 @@
-package id.zeinsetyobudi.githubuserlist.ui.detail
+package id.zeinsetyobudi.githubuserlist.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,19 +10,28 @@ import com.bumptech.glide.Glide
 import id.zeinsetyobudi.githubuserlist.R
 import id.zeinsetyobudi.githubuserlist.User
 import id.zeinsetyobudi.githubuserlist.databinding.ItemRowUserBinding
+import id.zeinsetyobudi.githubuserlist.helper.SearchDiffCallback
 import java.util.Collections.emptyList
 
-class SearchAdapter : ListAdapter<User, SearchAdapter.ListViewHolder>(DiffCallback()) {
+class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ListViewHolder>() {
 
-    private lateinit var binding: ItemRowUserBinding
+    private val listUsers = ArrayList<User>()
     private lateinit var onItemClickCallback: OnItemClickCallback
+
+    fun setUserList(listUser: List<User>){
+        val diffCallback = SearchDiffCallback(this.listUsers, listUser)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        this.listUsers.clear()
+        this.listUsers.addAll(listUser)
+        diffResult.dispatchUpdatesTo(this)
+    }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        binding = ItemRowUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemRowUserBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ListViewHolder(binding)
     }
 
@@ -31,12 +40,11 @@ class SearchAdapter : ListAdapter<User, SearchAdapter.ListViewHolder>(DiffCallba
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int, payload: List<Any>) {
-        val user = getItem(position)
-        holder.bind(user)
+        holder.bind(listUsers[position])
     }
 
     override fun getItemCount(): Int {
-        return currentList.size
+        return listUsers.size
     }
 
     inner class ListViewHolder(private val userBinding: ItemRowUserBinding) :
@@ -60,28 +68,5 @@ class SearchAdapter : ListAdapter<User, SearchAdapter.ListViewHolder>(DiffCallba
 
     interface OnItemClickCallback {
         fun onItemClicked(data: User)
-    }
-
-    private class DiffCallback : DiffUtil.ItemCallback<User>() {
-
-        override fun areItemsTheSame(oldItem: User, newItem: User) =
-            oldItem.surename == newItem.surename
-
-        override fun areContentsTheSame(oldItem: User, newItem: User) =
-            oldItem == newItem
-
-        override fun getChangePayload(oldItem: User, newItem: User): Any? {
-            if (oldItem.surename == newItem.surename) {
-                return if (oldItem.surename == newItem.surename) {
-                    super.getChangePayload(oldItem, newItem)
-                } else {
-                    val diff = Bundle()
-                    diff.putBoolean("arg.done", true)
-                    diff
-                }
-            }
-
-            return super.getChangePayload(oldItem, newItem)
-        }
     }
 }

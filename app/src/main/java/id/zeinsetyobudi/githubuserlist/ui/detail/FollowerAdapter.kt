@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import id.zeinsetyobudi.githubuserlist.Follower
 import id.zeinsetyobudi.githubuserlist.R
 
 class FollowerAdapter(private val listFollower: ArrayList<Follower>) :

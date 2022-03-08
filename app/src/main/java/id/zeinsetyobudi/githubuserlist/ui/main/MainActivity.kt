@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import id.zeinsetyobudi.githubuserlist.*
 import id.zeinsetyobudi.githubuserlist.databinding.ActivityMainBinding
 import id.zeinsetyobudi.githubuserlist.ui.detail.DetailActivity
-import id.zeinsetyobudi.githubuserlist.ui.detail.SearchAdapter
 import id.zeinsetyobudi.githubuserlist.ui.favorite.FavoriteActivity
 import id.zeinsetyobudi.githubuserlist.ui.setting.SettingPreferences
 import id.zeinsetyobudi.githubuserlist.ui.setting.SettingsActivity
@@ -123,8 +122,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUserData(listUsers: List<User>) {
-        searchAdapter.notifyDataSetChanged()
-        (actionMainBinding.rvUsers.adapter as SearchAdapter).submitList(listUsers)
+        searchAdapter.setUserList(listUsers)
     }
 
     private fun showSelectedUser(user: User) {

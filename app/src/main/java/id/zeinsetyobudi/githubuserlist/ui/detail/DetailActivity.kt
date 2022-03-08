@@ -27,7 +27,6 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var detailViewModel: DetailViewModel
     private lateinit var favoriteViewModel: FavoriteViewModel
     private lateinit var actionDetailBinding: ActivityDetailBinding
-    private lateinit var userDetail: User
     private var flag: Boolean = false
     private var favorite = Favorite()
 
@@ -37,30 +36,29 @@ class DetailActivity : AppCompatActivity() {
         setContentView(actionDetailBinding.root)
 
         val userIntent = intent.getParcelableExtra<User>(EXTRA_USER) as User
-        userDetail = userIntent
+        var userDetail = userIntent
         setUserDetailText(userDetail)
         setUserDetailFavorite(userDetail)
 
-        detailViewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
+        detailViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
         detailViewModel.detailUser(userIntent.username.toString())
-        detailViewModel.userDetail.observe(this, { user ->
+        detailViewModel.userDetail.observe(this) { user ->
             userDetail = user
             setUserDetailText(userDetail)
             setUserDetailFavorite(userDetail)
-        })
+        }
 
         favoriteViewModel = obtainViewModel(this@DetailActivity)
-        favoriteViewModel.select(userDetail.username.toString()).observe(this, { resultRow ->
+        favoriteViewModel.select(userDetail.username.toString()).observe(this) { resultRow ->
             if (resultRow > 0) {
                 actionDetailBinding.fabFavorite.backgroundTintList =
                     ColorStateList.valueOf(Color.parseColor("#BC1E1B"))
                 flag = true
             }
-        })
+        }
 
-        val sectionsPagerAdapter = SectionsPagerAdapter(this)
         val viewPager: ViewPager2 = findViewById(R.id.view_pager)
-        viewPager.adapter = sectionsPagerAdapter
+        viewPager.adapter = SectionsPagerAdapter(this)
         val tabs: TabLayout = findViewById(R.id.tabs)
         TabLayoutMediator(tabs, viewPager) { tab, position ->
             tab.text = resources.getString(TAB_TITLES[position])
@@ -112,7 +110,7 @@ class DetailActivity : AppCompatActivity() {
 
     private fun obtainViewModel(activity: AppCompatActivity): FavoriteViewModel {
         val factory = ViewModelFactory.getInstance(activity.application)
-        return ViewModelProvider(activity, factory).get(FavoriteViewModel::class.java)
+        return ViewModelProvider(activity, factory)[FavoriteViewModel::class.java]
     }
 
     private fun setUserDetailText(user: User){
@@ -144,6 +142,7 @@ class DetailActivity : AppCompatActivity() {
         favorite.follower = user.follower
         favorite.following = user.following
     }
+
     companion object {
         const val EXTRA_USER = "extra_user"
 

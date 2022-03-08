@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import id.zeinsetyobudi.githubuserlist.Follower
 import id.zeinsetyobudi.githubuserlist.User
 import id.zeinsetyobudi.githubuserlist.apicontroller.FollowResponseItem
 import id.zeinsetyobudi.githubuserlist.databinding.FragmentFollowerBinding
@@ -21,32 +22,29 @@ class FollowingFragment : Fragment() {
 
         val person = activity?.intent?.getParcelableExtra<User>(EXTRA_USER) as User
 
-        detailViewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
+        detailViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
 
-        detailViewModel.stateFollowing.observe(this, {
+        detailViewModel.stateFollowing.observe(this) {
             it.getContentIfNotHandled()?.let {
                 person.username?.let { followingList ->
-                    detailViewModel.getFollowingList(
-                        followingList
-                    )
+                    detailViewModel.getFollowingList(followingList)
                 }
             }
-        })
+        }
 
-        detailViewModel.listFollowing.observe(this, { followingList ->
+        detailViewModel.listFollowing.observe(this) { followingList ->
             setRecycleFollowingList(followingList)
-        })
+        }
 
-        detailViewModel.isLoadingFollowing.observe(this, {
+        detailViewModel.isLoadingFollowing.observe(this) {
             showLoading(it)
-        })
+        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         actionFollowingBinding = FragmentFollowerBinding.inflate(layoutInflater, container, false)
         return actionFollowingBinding.root
     }
@@ -61,8 +59,8 @@ class FollowingFragment : Fragment() {
             listFollower.add(follower)
         }
 
-        actionFollowingBinding.rvFollower.layoutManager = LinearLayoutManager(context)
         val listFollowerAdapter = FollowerAdapter(listFollower)
+        actionFollowingBinding.rvFollower.layoutManager = LinearLayoutManager(context)
         actionFollowingBinding.rvFollower.adapter = listFollowerAdapter
     }
 

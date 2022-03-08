@@ -39,7 +39,6 @@ class MainViewModel : ViewModel() {
             ) {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
-                    Log.i("Respose", "${response.message()}")
                     if (responseBody != null) {
                         for (users in responseBody.items) {
                             val result = User(

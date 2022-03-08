@@ -4,25 +4,25 @@ import androidx.recyclerview.widget.DiffUtil
 import id.zeinsetyobudi.githubuserlist.database.Favorite
 
 class FavoriteDiffCallback
-    (private val mOldNoteList: List<Favorite>, private val mNewNoteList: List<Favorite>) :
+    (private val mOldFavList: List<Favorite>, private val mNewFavList: List<Favorite>) :
     DiffUtil.Callback() {
 
     override fun getOldListSize(): Int {
-        return mOldNoteList.size
+        return mOldFavList.size
     }
 
     override fun getNewListSize(): Int {
-        return mNewNoteList.size
+        return mNewFavList.size
     }
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return mOldNoteList[oldItemPosition].id == mNewNoteList[newItemPosition].id
+        return mOldFavList[oldItemPosition].id == mNewFavList[newItemPosition].id
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        val oldEmployee = mOldNoteList[oldItemPosition]
-        val newEmployee = mNewNoteList[newItemPosition]
-        return oldEmployee.username == newEmployee.username &&
-                oldEmployee.avatar == newEmployee.avatar
+        val oldFavList = mOldFavList[oldItemPosition]
+        val newFavList = mNewFavList[newItemPosition]
+        return oldFavList.username == newFavList.username &&
+                oldFavList.avatar == newFavList.avatar
     }
 }
